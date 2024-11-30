@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import RuneList from "../components/RuneList";
+import SearchFilter from "../components/SearchFilter";
 import { fetchRiotRunes } from "../services/riotApi";
 
 const RunesPage = () => {
   const [runes, setRunes] = useState([]);
   const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     const loadRunes = async () => {
@@ -14,18 +16,23 @@ const RunesPage = () => {
     loadRunes();
   }, []);
 
-  const filteredRunes = runes.filter((rune) =>
-    rune.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const filterOptions = ["Precision", "Domination", "Sorcery"]; // 예시
+
+  const filteredRunes = runes.filter((rune) => {
+    return (
+      rune.name.toLowerCase().includes(search.toLowerCase()) &&
+      (filter === "" || rune.category === filter)
+    );
+  });
 
   return (
     <div>
-      <input
-        type="text"
-        className="form-control mb-4"
-        placeholder="Search Runes"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+      <SearchFilter
+        search={search}
+        setSearch={setSearch}
+        filter={filter}
+        setFilter={setFilter}
+        filterOptions={filterOptions}
       />
       <RuneList runes={filteredRunes} />
     </div>
