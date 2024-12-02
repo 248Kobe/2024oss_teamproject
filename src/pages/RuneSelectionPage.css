@@ -1,0 +1,45 @@
+/* 기본 스타일 */
+.rune-slot {
+  margin-top: 10px;
+}
+
+.slot-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.rune-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+/* 첫 4개의 룬 강조 */
+.rune-card.highlighted-rune .rune-icon {
+  width: 60px;
+  height: 60px;
+}
+
+.rune-card.regular-rune .rune-icon {
+  width: 40px;
+  height: 40px;
+}
+
+/* 모든 룬의 이름 텍스트 크기 줄이기 */
+.rune-name {
+  font-size: 12px; /* 글자 크기 줄이기 */
+  margin-top: 5px;
+  color: white;
+}
+
+.rune-icon {
+  cursor: pointer;
+}
+
+.rune-icon:hover {
+  transform: scale(1.1);
+}
